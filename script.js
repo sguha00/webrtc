@@ -3,7 +3,7 @@ if (!location.hash) {
   location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
 const roomHash = location.hash.substring(1);
-const videoId = location.query;
+const videoId = location.search.split("?v=")[1];
 
 // TODO: Replace with your own channel ID
 const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
@@ -180,7 +180,7 @@ function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     height: '390',
     width: '640',
-    videoId: 'M7lc1UVf-VE',
+    videoId: videoId || '_o7qjN3KF8U',
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange
