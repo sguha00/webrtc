@@ -201,7 +201,7 @@ function step() {
   const seconds = remaining - hours * 3600 - minutes * 60;
   let remainingStr = `${pad(minutes)}:${pad(seconds)}`;
   if (hours > 0) remainingStr = `${pad(hours)}:${remainingStr}`;
-  element.innerHTML = remainingStr;
+  if (element.innerHTML !== remainingStr) element.innerHTML = remainingStr;
   setTimeout(step, 1000);
 }
 
