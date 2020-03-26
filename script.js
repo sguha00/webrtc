@@ -139,6 +139,7 @@ function processMessage(event) {
 
   switch (event.data) {
     case YT.PlayerState.PLAYING:
+      player.seekTo(event.target.playerInfo.currentTime);
       // window.phone.sendData(event);
       player.playVideo();
       break;
@@ -228,7 +229,6 @@ function onPlayerStateChange(event) {
     dataChannel.send(JSON.stringify(event));
   }
   console.log("EVENT", isOfferer, event.data, event.target.playerInfo.currentTime);
-  event.username = user_name;
   switch (event.data) {
     case YT.PlayerState.PLAYING:
       if (done) return;
