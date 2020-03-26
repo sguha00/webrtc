@@ -188,9 +188,26 @@ function onYouTubeIframeAPIReady() {
   });
 }
 
+let element = document.getElementById('timer');
+
+function pad(num) {
+  return ("0"+num).slice(-2);
+}
+
+function step() {
+  const remaining = Math.round(player.getDuration() - player.getCurrentTime());
+  const hours = Math.floor(remaining / 3600);
+  const minutes = Math.floor((remaining - hours * 60) / 60);
+  const seconds = remaining - hours * 3600 - minutes * 60;
+  let remainingStr = `${pad(minutes)}:${pad(seconds)}`;
+  if (hours > 0) remainingStr = `${pad(hours)}:${remainingStr}`;
+  element.innerHTML = remainingStr;
+  setTimeout(step, 1000);
+}
+
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {
-  // event.target.playVideo();
+  step();
 }
 
 // 5. The API calls this function when the player's state changes.
@@ -211,7 +228,6 @@ function onPlayerStateChange(event) {
     dataChannel.send(JSON.stringify(event));
   }
   console.log("EVENT", isOfferer, event.data, event.target.playerInfo.currentTime);
-  if (!window.phone) return; // No active video chat, return.
   event.username = user_name;
   switch (event.data) {
     case YT.PlayerState.PLAYING:
@@ -231,5 +247,3 @@ function onPlayerStateChange(event) {
 function stopVideo() {
   player.stopVideo();
 }
-
-
