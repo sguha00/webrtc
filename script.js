@@ -3,7 +3,7 @@ if (!location.hash) {
   location.hash = '_o7qjN3KF8U';
 }
 const roomHash = location.pathname;
-const videoId = location.hash;
+const videoId = location.hash.split('#')[1];
 
 // TODO: Replace with your own channel ID
 const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
