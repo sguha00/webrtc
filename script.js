@@ -1,9 +1,9 @@
 // Generate random room name if needed
 if (!location.hash) {
-  location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+  location.hash = '_o7qjN3KF8U';
 }
-const roomHash = location.hash.substring(1);
-const videoId = location.search.split("?v=")[1];
+const roomHash = location.pathname;
+const videoId = location.hash;
 
 // TODO: Replace with your own channel ID
 const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
