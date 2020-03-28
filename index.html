@@ -1,63 +1,78 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Sweatbud</title>
-  <style>
-    html {
-      height: 100%;
-      width: 100%;
-    }
-    h1 {
-      margin: 0.5em;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: black;
-      color: white;
-      height: 100%;
-      width: 100%;
-    }
-    content {
-      display: flex;
-      /* height: 100%; */
-      height: calc(100% - 5em);
-      width: 100%;
-      margin: 0;
-      justify-content: space-between;
-      position: relative;
-    }
-    .playercontainer {
-      width: 100%;
-    }
-    video {
-      width: 133.33px;
-      height: 100px;
-      box-sizing: border-box;
-      border-radius: 2px;
-      padding: 0;
-      /* box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px, rgba(156, 172, 172, 0.2) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px; */
-    }
-    .videocontainer {
-      display: flex;
-      flex-direction: row;
-      position: fixed;
-      top: 0;
-      right: 0;
-    }
-  </style>
-</head>
-<body>
-  <h1>
-    Sweatbud - 
-  </h1>
-  <content>
-    <div class='playercontainer'>
-      <div id="player"></div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sweatbud</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+      :root {
+        --primary: blue;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      .hidden {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Sweatbud
+      </h1>
+      <div class="columns is_centered">
+        <div class="column is-two-thirds">
+          <div class="field has-addons">
+            <p class="control is-expanded">
+              <input id="youtubeUrl" class="input" type="text" placeholder="Enter Youtube URL">
+            </p>
+            <p class="control">
+              <button id="generate" class="button is-info">
+                Generate
+              </button>
+            </p>
+          </div>
+          <div id="urlGroup" class="field is-grouped hidden">
+            <p class="control is-expanded">
+              <input id="url" class="input is-static" type="email" value="me@example.com" readonly>
+            </p>
+            <p class="control">
+              <button id="copy" class="button is-info">
+                Copy
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </content>
-  <!-- <script src="script.js"></script> -->
-</body>
+  </section>
+  <script>
+    let urlInput = document.getElementById("youtubeUrl");
+    let urlGroup = document.getElementById("urlGroup");
+    let urlOutput = document.getElementById("url");
+    let copyButton = document.getElementById("copy");
+    let generateButton = document.getElementById("generate");
+
+    generateButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        const parsedUrl = new URL(urlInput.value);
+        const videoId = parsedUrl.searchParams.get("v");
+        const roomId = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+        urlOutput.value = `${location.origin}/${roomId}#${videoId}`;
+        urlGroup.classList.remove('hidden');
+    });
+
+    copyButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        urlOutput.select();
+        document.execCommand("copy");
+        urlOutput
+    });
+  </script>
+  </body>
 </html>
