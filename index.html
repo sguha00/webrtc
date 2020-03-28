@@ -55,6 +55,9 @@
               <button id="copy" class="button is-info">
                 Copy
               </button>
+              <button id="go" class="button is-primary">
+                Go
+              </button>
             </p>
           </div>
         </div>
@@ -68,6 +71,7 @@
     let urlGroup = document.getElementById("urlGroup");
     let urlOutput = document.getElementById("url");
     let copyButton = document.getElementById("copy");
+    let goButton = document.getElementById("go");
     let generateButton = document.getElementById("generate");
 
     function getVideoId(url) {
@@ -105,7 +109,10 @@
         event.preventDefault();
         urlOutput.select();
         document.execCommand("copy");
-        urlOutput
+    });
+
+    goButton.addEventListener("click", function (event) {
+        window.location = urlOutput.value;
     });
   </script>
   </body>
