@@ -16,6 +16,16 @@
       .hidden {
         display: none !important;
       }
+      .help {
+        display: none;
+      }
+      .error .help {
+        display: block;
+      }
+      .error input {
+        border-color: #f14668
+      }
+
     </style>
   </head>
   <body>
@@ -24,11 +34,11 @@
       <h1 class="title">
         Sweatbud
       </h1>
-      <div class="columns is_centered">
+      <div id= "main" class="columns is_centered">
         <div class="column is-two-thirds">
           <div class="field has-addons">
             <p class="control is-expanded">
-              <input id="youtubeUrl" class="input" type="text" placeholder="Enter Youtube URL">
+              <input id="youtubeUrl" class="input" type="text" placeholder="YouTube Video URL">
             </p>
             <p class="control">
               <button id="generate" class="button is-info">
@@ -36,6 +46,7 @@
               </button>
             </p>
           </div>
+          <p class="help is-danger">Must be a valid YouTube Video URL</p>
           <div id="urlGroup" class="field is-grouped hidden">
             <p class="control is-expanded">
               <input id="url" class="input is-static" type="email" value="me@example.com" readonly>
@@ -52,19 +63,42 @@
     </div>
   </section>
   <script>
+    let section = document.getElementById("main");
     let urlInput = document.getElementById("youtubeUrl");
     let urlGroup = document.getElementById("urlGroup");
     let urlOutput = document.getElementById("url");
     let copyButton = document.getElementById("copy");
     let generateButton = document.getElementById("generate");
 
+    function getVideoId(url) {
+      try {
+        const parsedUrl = new URL(url);
+        if (parsedUrl.origin === "https://www.youtube.com") {
+          return parsedUrl.searchParams.get("v");
+        } else if (parsedUrl.origin === "https://youtu.be") {
+          debugger;
+          return parsedUrl.pathname.split('/')[1];
+        }
+        return false;
+      } catch {
+        return false;
+      }
+    }
+
+    urlInput.addEventListener("input", function (event) {
+      section.classList.remove('error');
+    });
+
     generateButton.addEventListener("click", function (event) {
         event.preventDefault();
-        const parsedUrl = new URL(urlInput.value);
-        const videoId = parsedUrl.searchParams.get("v");
-        const roomId = Math.floor(Math.random() * 0xFFFFFF).toString(16);
-        urlOutput.value = `${location.origin}/${roomId}#${videoId}`;
-        urlGroup.classList.remove('hidden');
+        const videoId = getVideoId(urlInput.value);
+        if (videoId) {
+          const roomId = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+          urlOutput.value = `${location.origin}/${roomId}#${videoId}`;
+          urlGroup.classList.remove('hidden');
+        } else {
+          section.classList.add('error');
+        }
     });
 
     copyButton.addEventListener("click", function (event) {
