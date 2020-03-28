@@ -198,7 +198,7 @@ function pad(num) {
 function step() {
   const remaining = Math.round(player.getDuration() - player.getCurrentTime());
   const hours = Math.floor(remaining / 3600);
-  const minutes = Math.floor((remaining - hours * 60) / 60);
+  const minutes = Math.floor((remaining - hours * 3600) / 60);
   const seconds = remaining - hours * 3600 - minutes * 60;
   let remainingStr = `${pad(minutes)}:${pad(seconds)}`;
   if (hours > 0) remainingStr = `${pad(hours)}:${remainingStr}`;
