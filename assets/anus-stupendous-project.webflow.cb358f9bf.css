@@ -412,7 +412,7 @@
   align-items: center;
   background-color: transparent;
   font-family: Sugarpunchdemo, sans-serif;
-  color: #2652cb; 
+  color: white; 
   font-size: 40px;
   line-height: 80px;
   font-weight: 400;
@@ -574,7 +574,7 @@
 }
 
 .div-block-4 {
-  background-color: #0c0f0a;
+  background-color: #ff0666;
 }
 
 .container-7 {
@@ -602,11 +602,11 @@
 }
 
 .div-block-5 {
-  background-color: #f2dcc5;
+  background-color: #2652cb;
 }
 
 .div-block-6 {
-  background-color: #f2dcc5;
+  background-color: #ffc025;
 }
 
 @media screen and (max-width: 991px) {
