@@ -6,7 +6,7 @@ const roomHash = location.pathname;
 const videoId = location.hash.split('#')[1];
 
 // TODO: Replace with your own channel ID
-const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
+const drone = new ScaleDrone('LceYjxDfo3qOd65P');
 // Room name needs to be prefixed with 'observable-'
 const roomName = 'observable-' + roomHash;
 const configuration = {
@@ -230,18 +230,18 @@ function onPlayerStateChange(event) {
     dataChannel.send(JSON.stringify(event));
   }
   console.log("EVENT", isOfferer, event.data, event.target.playerInfo.currentTime);
-  switch (event.data) {
-    case YT.PlayerState.PLAYING:
-      if (done) return;
-      // window.phone.sendData(event);
-      break;
-    case YT.PlayerState.PAUSED:
-      // window.phone.sendData(event);
-      break;
-    case YT.PlayerState.BUFFERING: // If they seeked, dont send this.
-      if (seek) seek = false;
-      // else window.phone.sendData(event);
-  }
+  // switch (event.data) {
+  //   case YT.PlayerState.PLAYING:
+  //     // if (done) return;
+  //     // window.phone.sendData(event);
+  //     break;
+  //   case YT.PlayerState.PAUSED:
+  //     // window.phone.sendData(event);
+  //     break;
+  //   case YT.PlayerState.BUFFERING: // If they seeked, dont send this.
+  //     // if (seek) seek = false;
+  //     // else window.phone.sendData(event);
+  // }
 }
 
 
