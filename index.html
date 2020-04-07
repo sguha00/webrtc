@@ -20,6 +20,7 @@
   <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
   <script
     type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
+  <script src="https://use.fontawesome.com/b87867009f.js"></script>
   <link href="./favicon.ico" rel="shortcut icon" type="image/x-icon">
   <link href="./favicon.ico" rel="apple-touch-icon">
   <style>
@@ -85,6 +86,9 @@
               <button id="go" class="button is-primary">
                 Go
               </button>
+              <a id="calendar" href="#" target="_blank" class="button is-link">
+                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+              </a>
             </p>
           </div>
         </div>
@@ -113,6 +117,7 @@
     let copyButton = document.getElementById("copy");
     let goButton = document.getElementById("go");
     let generateButton = document.getElementById("generate");
+    let calendarLink = document.getElementById("calendar");
 
     function getVideoId(url) {
       try {
@@ -140,6 +145,11 @@
           const roomId = Math.floor(Math.random() * 0xFFFFFF).toString(16);
           urlOutput.value = `${location.origin}/${roomId}#${videoId}`;
           urlGroup.classList.remove('hidden');
+          const calendarURL = new URL(
+            `?text=SuperSet+Workout&details=${encodeURIComponent(`Join me for a workout: ${urlOutput.value}`)}`,
+            "https://calendar.google.com/calendar/r/eventedit"
+          );
+          calendarLink.href = calendarURL;
         } else {
           section.classList.add('error');
         }
