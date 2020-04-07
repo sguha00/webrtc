@@ -80,7 +80,6 @@ function startWebRTC(isOfferer) {
     // If user is not the offerer let wait for a data channel
     pc.ondatachannel = event => {
       dataChannel = event.channel;
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       setupDataChannel();
     }
   }
@@ -156,6 +155,8 @@ function processMessage(event) {
 
 // Hook up data channel event handlers
 function setupDataChannel() {
+  let firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   console.log("setupDataChannel");
   checkDataChannelState();
   dataChannel.onopen = checkDataChannelState;
