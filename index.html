@@ -157,8 +157,13 @@
 
     copyButton.addEventListener("click", function (event) {
         event.preventDefault();
-        urlOutput.select();
-        document.execCommand("copy");
+        navigator.clipboard.writeText(urlOutput.value);
+        copyButton.disabled = true;
+        copyButton.innerHTML = "Copied";
+        setTimeout(() => {
+          copyButton.disabled = false;
+          copyButton.innerHTML = "Copy";
+        }, 500);
     });
 
     goButton.addEventListener("click", function (event) {
