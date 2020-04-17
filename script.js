@@ -1,9 +1,14 @@
-// Generate random room name if needed
-if (!location.hash) {
-  location.hash = '_o7qjN3KF8U';
-}
 const roomHash = location.pathname;
-const videoId = location.hash.split('#')[1];
+const getVideoId = () => {
+  let videoId = location.hash.split('#')[1];
+  if (!videoId && window.location.search) {
+    let urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('v')) {
+      return urlParams.get('v');
+    }
+  }
+  return videoId;
+}
 
 // TODO: Replace with your own channel ID
 const drone = new ScaleDrone('LceYjxDfo3qOd65P');
@@ -182,7 +187,7 @@ function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     height: '100%',
     width: '100%',
-    videoId: videoId || '_o7qjN3KF8U',
+    videoId: getVideoId() || '_o7qjN3KF8U',
     playerVars: { 'controls': isOfferer ? 0 : 1 },
     events: {
       'onReady': onPlayerReady,
