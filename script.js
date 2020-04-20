@@ -254,3 +254,8 @@ function onPlayerStateChange(event) {
 function stopVideo() {
   player.stopVideo();
 }
+
+const isMobileDevice = /Mobi/i.test(window.navigator.userAgent)
+if (isMobileDevice) {
+  alert("Superset works best on a desktop browser, specifically chrome");
+}

@@ -110,6 +110,11 @@
   <script src="./assets/jquery-3.4.1.min.220afd743d.js" type="text/javascript"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script>
+    const isMobileDevice = /Mobi/i.test(window.navigator.userAgent)
+    if (isMobileDevice) {
+      alert("Superset works best on a desktop browser, specifically chrome");
+    }
+
     let section = document.getElementById("main");
     let urlInput = document.getElementById("youtubeUrl");
     let urlGroup = document.getElementById("urlGroup");
